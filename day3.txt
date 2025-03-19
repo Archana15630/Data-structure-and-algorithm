@@ -1,0 +1,327 @@
+insertion:
+package sample;
+
+
+	class Node {
+	    int data;
+	    Node next;
+
+	    public Node(int data) {
+	        this.data = data;
+	        this.next = null;
+	    }
+	}
+
+	
+	 public class SinglyLinkedList {
+	    Node head; 
+	    public SinglyLinkedList() {
+	        head = null;
+	    }
+
+	   
+	    public void insertAtBeginning(int data) {
+	       
+	        Node newNode = new Node(data);
+
+	        newNode.next = head;
+
+	        head = newNode;
+	    }
+
+	    public void insertAtPosition(int data, int position) {
+	       
+	        Node newNode = new Node(data);
+
+	        if (position == 0) {
+	            newNode.next = head;
+	            head = newNode;
+	            return;
+	        }
+
+	       
+	        Node current = head;
+	        for (int i = 0; current != null && i < position - 1; i++) {
+	            current = current.next;
+	        }
+
+	        
+	        if (current == null) {
+	            System.out.println("Position out of range.");
+	            return;
+	        }
+
+	        newNode.next = current.next;
+	        current.next = newNode;
+	    }
+	    public void printList() {
+	        Node current = head;
+	        if (current == null) {
+	            System.out.println("List is empty.");
+	            return;
+	        }
+
+	     
+	        while (current != null) {
+	            System.out.print(current.data + " ");
+	            current = current.next;
+	        }
+	        System.out.println(); 
+	    }
+	
+	
+	    public static void main(String[] args) {
+	        
+	        SinglyLinkedList list = new SinglyLinkedList();
+
+	        list.insertAtBeginning(50);
+	        list.insertAtBeginning(40);
+	        list.insertAtBeginning(30);
+	        list.insertAtBeginning(20);
+	        list.insertAtBeginning(10);
+
+	        list.insertAtBeginning(777);
+
+	        list.insertAtPosition(333, 4);
+
+	        System.out.print("Linked List: ");
+	        list.printList(); 
+	}
+
+} 
+
+deletion:
+
+package sample;
+class Linked_list {
+    
+    static class Node {
+        int data;
+        Node next;
+
+      
+        Node(int data) {
+            this.data = data;
+            this.next = null;
+        }
+    }
+
+    Node head;
+
+    
+    public void append(int data) {
+        Node newNode = new Node(data);
+        if (head == null) {
+            head = newNode;
+            return;
+        }
+        Node last = head;
+        while (last.next != null) {
+            last = last.next;
+        }
+        last.next = newNode;
+    }
+
+   
+    public void deleteAtPosition(int position) {
+        if (head == null) {
+            System.out.println("The list is empty.");
+            return;
+        }
+
+        
+        if (position == 0) {
+            head = head.next;
+            return;
+        }
+
+        Node current = head;
+        int currentPos = 0;
+
+       
+        while (current != null && currentPos < position - 1) {
+            current = current.next;
+            currentPos++;
+        }
+    }
+}
+
+
+
+middle num
+package sample;
+class LinkedList{
+   
+    static class Node {
+        int data;
+        Node next;
+
+        Node(int data) {
+            this.data = data;
+            this.next = null;
+        }
+    }
+
+   
+    Node head;
+
+  
+    public void append(int data) {
+        Node newNode = new Node(data);
+        if (head == null) {
+            head = newNode;
+            return;
+        }
+        Node last = head;
+        while (last.next != null) {
+            last = last.next;
+        }
+        last.next = newNode;
+    }
+
+    
+    public int findMiddle() {
+        if (head == null) {
+            return -1; 
+        }
+
+        Node slow = head; 
+        Node fast = head; 
+      
+        while (fast != null && fast.next != null) {
+            slow = slow.next;      
+            fast = fast.next.next; 
+        }
+
+        return slow.data; 
+    }
+
+    
+    public void display() {
+        if (head == null) {
+            System.out.println("The list is empty.");
+            return;
+        }
+
+        Node current = head;
+        while (current != null) {
+            System.out.print(current.data + " -> ");
+            current = current.next;
+        }
+        System.out.println("None");
+    }
+
+    public static void main(String[] args) {
+        LinkedList list = new LinkedList();
+
+       
+        list.append(10);
+        list.append(20);
+        list.append(30);
+        list.append(40);
+        list.append(50);
+        list.append(60);
+
+       
+        System.out.println("Linked List:");
+        list.display();
+
+       
+        int middle = list.findMiddle();
+        System.out.println("The middle element is: " + middle);
+    }
+}
+
+package sample;
+
+class Reverse_linkedlist {
+	   
+	    static class Node {
+	        int data;
+	        Node next;
+
+	        
+	        Node(int data) {
+	            this.data = data;
+	            this.next = null;
+	        }
+	    }
+
+	 
+	    Node head;
+
+	    
+	    public void append(int data) {
+	        Node newNode = new Node(data);
+	        if (head == null) {
+	            head = newNode;
+	            return;
+	        }
+	        Node last = head;
+	        while (last.next != null) {
+	            last = last.next;
+	        }
+	        last.next = newNode;
+	    }
+
+	
+	    public void reverse() {
+	        Node prev = null;
+	        Node current = head;
+	        Node next = null;
+
+	        while (current != null) {
+	         
+	            next = current.next;
+
+	            
+	            current.next = prev;
+
+	            
+	            prev = current;
+	            current = next;
+	        }
+
+	     
+	        head = prev;
+	    }
+
+	  
+	    public void display() {
+	        if (head == null) {
+	            System.out.println("The list is empty.");
+	            return;
+	        }
+
+	        Node current = head;
+	        while (current != null) {
+	            System.out.print(current.data + " -> ");
+	            current = current.next;
+	        }
+	        System.out.println("None");
+	    }
+
+	    public static void main(String[] args) {
+	        LinkedList list = new LinkedList();
+
+	        list.append(10);
+	        list.append(20);
+	        list.append(30);
+	        list.append(40);
+	        list.append(50);
+
+	     
+	        System.out.println("Before Reversal:");
+	        list.display();
+
+	  
+	        list.reverse();
+
+	      
+	        System.out.println("After Reversal:");
+	        list.display();
+	    }
+	}
+
+
+

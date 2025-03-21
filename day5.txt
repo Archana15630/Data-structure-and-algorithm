@@ -1,0 +1,327 @@
+CircularLinkedList-Delete at end
+
+
+
+class Node {
+int data;
+Node next;
+
+Node(int data) {
+    this.data = data;
+    this.next = null;
+}
+}
+
+class CircularLinkedList {
+private Node head = null;
+private Node tail = null;
+
+public void addNode(int data) {
+    Node newNode = new Node(data);
+    if (head == null) {
+        head = newNode;
+        tail = newNode;
+        tail.next = head;
+    } else {
+        tail.next = newNode;
+        tail = newNode;
+        tail.next = head;
+    }
+}
+
+public void deleteAtEnd() {
+    if (head == null) {
+        System.out.println("The list is empty. No nodes to delete.");
+        return;
+    }
+    
+    if (head == tail) {
+       
+        System.out.println("Deleting node with value: " + head.data);
+        head = null;
+        tail = null;
+        return;
+    }
+
+    Node current = head;
+    while (current.next != tail) {
+        current = current.next;
+    }
+
+    System.out.println("Deleting node with value: " + tail.data);
+    current.next = head;
+    tail = current;
+}
+
+public void display() {
+    if (head == null) {
+        System.out.println("The circular linked list is empty.");
+        return;
+    }
+
+    Node current = head;
+    do {
+        System.out.print(current.data + " -> ");
+        current = current.next;
+    } while (current != head);
+    System.out.println("(back to head)");
+}
+
+public static void main(String[] args) {
+    CircularLinkedList cll = new CircularLinkedList();
+
+    cll.addNode(10);
+    cll.addNode(20);
+    cll.addNode(30);
+    cll.addNode(40);
+
+    System.out.println("Circular Linked List:");
+    cll.display();
+
+    System.out.println("\nDeleting node at the end...");
+    cll.deleteAtEnd();
+    cll.display();
+
+   System.out.println("\n Deleting node at end");
+   cll.deleteAtEnd();
+   cll.display();
+
+
+
+
+
+
+
+
+Deletion at beginning:
+class Node {
+    int data;
+    Node next;
+
+    Node(int data) {
+        this.data = data;
+        this.next = null;
+    }
+}
+
+class CircularLinkedList {
+    private Node head;
+    private Node tail;
+
+    public CircularLinkedList() {
+        head = null;
+        tail = null;
+    }
+
+   
+    public void deleteAtBeginning() {
+        if (head == null) { 
+            System.out.println("The list is empty, nothing to delete.");
+            return;
+        }
+
+        if (head == tail) { 
+            head = null;
+            tail = null;
+        } else { 
+            head = head.next; 
+            tail.next = head; 
+        }
+    }
+
+    
+    public void display() {
+        if (head == null) {
+            System.out.println("The list is empty.");
+            return;
+        }
+
+        Node temp = head;
+        do {
+            System.out.print(temp.data + " -> ");
+            temp = temp.next;
+        } while (temp != head);
+        System.out.println("(back to head)");
+    }
+
+  
+    public void addToEnd(int data) {
+        Node newNode = new Node(data);
+        if (head == null) { 
+            head = newNode;
+            tail = newNode;
+            newNode.next = head;
+        } else {
+            tail.next = newNode;
+            tail = newNode;
+            tail.next = head;
+        }
+    }
+}
+
+public class Main {
+    public static void main(String[] args) {
+        CircularLinkedList cll = new CircularLinkedList();
+        cll.addToEnd(10);
+        cll.addToEnd(20);
+        cll.addToEnd(30);
+
+        System.out.println("Original list:");
+        cll.display();
+
+        System.out.println("\nDeleting the first node...");
+        cll.deleteAtBeginning();
+        cll.display();
+    }
+}
+
+
+
+
+
+Insertion in circular list:
+class Node {
+    int data;
+    Node next;
+
+    Node(int data) {
+        this.data = data;
+        this.next = null;
+    }
+}
+
+class CircularLinkedList {
+    private Node head = null;
+    private Node tail = null;
+
+    public void insertAtBeginning(int data) {
+        Node newNode = new Node(data);
+        if (head == null) {
+            head = newNode;
+            tail = newNode;
+            tail.next = head;
+        } else {
+            newNode.next = head;
+            head = newNode;
+            tail.next = head;
+        }
+    }
+
+    public void insertAtEnd(int data) {
+        Node newNode = new Node(data);
+        if (head == null) {
+            head = newNode;
+            tail = newNode;
+            tail.next = head;
+        } else {
+            tail.next = newNode;
+            tail = newNode;
+            tail.next = head;
+        }
+    }
+
+    public void insertAtPosition(int data, int position) {
+        if (position < 1) {
+            System.out.println("Invalid position!");
+            return;
+        }
+
+        Node newNode = new Node(data);
+
+        if (position == 1) {
+            insertAtBeginning(data);
+            return;
+        }
+
+        Node current = head;
+        int count = 1;
+
+        while (current != null && count < position - 1) {
+            current = current.next;
+            count++;
+            if (current == head) {
+                break; // Prevent infinite loop
+            }
+        }
+
+        if (current == null || current.next == head) {
+            System.out.println("Position exceeds list size, inserting at end.");
+            insertAtEnd(data);
+        } else {
+            newNode.next = current.next;
+            current.next = newNode;
+        }
+    }
+
+    public void display() {
+        if (head == null) {
+            System.out.println("Circular linked list is empty.");
+            return;
+        }
+
+        Node current = head;
+        do {
+            System.out.print(current.data + " -> ");
+            current = current.next;
+        } while (current != head);
+        System.out.println("(back to head)");
+    }
+
+
+    public static void main(String[] args) {
+        CircularLinkedList cll = new CircularLinkedList();
+
+        cll.insertAtEnd(10);
+        cll.insertAtEnd(20);
+        cll.insertAtEnd(30);
+
+        System.out.println("List after inserting at end:");
+        cll.display();
+
+        cll.insertAtBeginning(5);
+        System.out.println("List after inserting at beginning:");
+        cll.display();
+
+        cll.insertAtPosition(25, 3);
+        System.out.println("List after inserting at position 3:");
+        cll.display();
+    }
+}
+
+
+   
+}
+}
+
+
+
+
+
+
+stack in java
+package sample;
+
+import java.util.Stack;
+
+public class StackDemo {
+    public static void main(String[] args) {
+       
+        Stack<String> stack = new Stack<>();
+
+        
+        stack.push("54");
+        stack.push("34");
+        stack.push("65");
+
+ System.out.println("Stack: " + stack);
+System.out.println("Top Element: " + stack.peek());
+
+      
+        System.out.println("Popped Element: " + stack.pop());
+
+      
+        System.out.println("Is Stack Empty? " + stack.isEmpty());
+        
+               System.out.println("Final Stack: " + stack);
+    }
+}

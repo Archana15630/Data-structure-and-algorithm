@@ -1,0 +1,66 @@
+implementing linked list using stack
+
+package sample;
+import java.util.Stack;
+
+class Node {
+    int data;
+    Node next;
+
+    public Node(int data) {
+        this.data = data;
+        this.next = null;
+    }
+}
+
+class LinkedListUsingStack {
+    private Stack<Node> stack;
+
+    public LinkedListUsingStack() {
+        stack = new Stack<>();
+    }
+
+    public void push(int data) {
+        Node newNode = new Node(data);
+        if (!stack.isEmpty()) {
+            newNode.next = stack.peek(); 
+        }
+        stack.push(newNode); 
+    }
+
+    public int pop() {
+        if (stack.isEmpty()) {
+            throw new IllegalStateException("Stack is empty.");
+        }
+        return stack.pop().data; 
+    }
+
+    public void display() {
+        if (stack.isEmpty()) {
+            System.out.println("Linked list is empty.");
+            return;
+        }
+        Node current = stack.peek(); 
+        while (current != null) {
+            System.out.print(current.data + " -> ");
+            current = current.next;         }
+        System.out.println("null");
+    }
+
+
+
+    public static void main(String[] args) {
+        LinkedListUsingStack ll = new LinkedListUsingStack();
+
+        ll.push(10);
+        ll.push(20);
+        ll.push(30);
+
+        System.out.println("Linked List:");
+        ll.display();
+
+        System.out.println("Popped element: " + ll.pop());
+        System.out.println("Linked List after pop:");
+        ll.display();
+    }
+}
